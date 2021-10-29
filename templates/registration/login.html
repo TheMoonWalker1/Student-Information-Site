@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <section id="login" class="s-login">
+
+        <div class="overlay"></div>
+        <div class="login__line"></div>
+
+        <div class="row section-header" data-aos="fade-up">
+            <div class="col-full">
+                <h3 class="subhead">login</h3>
+            </div>
+        </div>
+
+        <div class="row contact-content" data-aos="fade-up" style="background-color: rgba(0, 0, 0, 0.6) !important;">
+
+            <div class="contact-primary">
+
+                <br><br><br><br><br>
+
+                <h3 class="h6">Login to Access Gen.</h3>
+
+                <form name="contactForm" id="contactForm" method="post" action="" novalidate="novalidate">
+                    <fieldset>
+                    {% csrf_token %}
+
+                    <div class="form-field">
+                        <input name="username" type="text" autofocus autocapitalize="none" autocomplete="username" maxlength="254" id="id_username" placeholder="Email" required="" aria-required="true" class="full-width">
+                    </div>
+                    <div class="form-field">
+                        <input name="password" type="password" autocomplete="current-password" id="id_password" placeholder="Password" minlength="2" required="" aria-required="true" class="full-width">
+                    </div>
+                    <div class="form-field">
+                        <button class="full-width btn--primary">Login</button>
+                        <div class="submit-loader">
+                            <div class="text-loader">Sending...</div>
+                            <div class="s-loader">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    </fieldset>
+                </form>
+
+            </div> <!-- end contact-primary -->
+
+            <div class="contact-secondary">
+                <div class="contact-info">
+
+                    <h3 class="h6 hide-on-fullwidth">Don't Have an Account?</h3>
+
+                    <div class="cinfo">
+                        <h5>Students</h5>
+                        <p>
+                            Ask your teacher or school to create an account for you!
+                        </p>
+                    </div>
+
+                    <div class="cinfo">
+                        <h5>Schools</h5>
+                        <p>
+                            To create staff accounts, contact us at <a href="mailto:gen-contact@gmail.com">gen-contact@gmail.com</a> and we will get you set up ASAP
+                        </p>
+                    </div>
+
+                    <div class="cinfo">
+                        <h5>Call Us At</h5>
+                        <p>
+                            Phone: (+63) 555 1212<br>
+                            Mobile: (+63) 555 0100<br>
+                            Fax: (+63) 555 0101
+                        </p>
+                    </div>
+                    <ul class="contact-social">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                        </li>
+                    </ul> <!-- end contact-social -->
+                </div> <!-- end contact-info -->
+            </div> <!-- end contact-secondary -->
+
+        </div> <!-- end contact-content -->
+
+    </section> <!-- end s-login -->
+{% endblock %}
