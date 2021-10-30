@@ -48,12 +48,12 @@
    /* Menu on Scrolldown
     * ------------------------------------------------------ */
     var clMenuOnScrolldown = function() {
-        
+
         var menuTrigger = $('.header-menu-toggle');
 
         $WIN.on('scroll', function() {
 
-            if ($WIN.scrollTop() > 150) {
+            if ($WIN.scrollTop() > 60) {
                 menuTrigger.addClass('opaque');
             }
             else {

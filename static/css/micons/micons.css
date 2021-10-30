@@ -718,3 +718,9 @@
     content: "\e9e6";
 }
 
+/** new **/
+
+.icon-page-with-bookmark:before {
+    content: "\e934"
+}
+

@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'start/base1.html' %}
 {% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Start{% endblock %}
 
 {% block content %}
 
@@ -27,10 +27,11 @@
                     <a href="{% url 'login' %}" class="btn btn--stroke">
                         Login
                     </a>
-                    {% endif %}
-                    <a href="#about" class="smoothscroll btn btn--stroke">
-                        Learn More
+                    {% else %}
+                    <a href="{% url 'login' %}" class="smoothscroll btn btn--stroke">
+                        Continue
                     </a>
+                    {% endif %}
                 </div>
 
             </div>
@@ -45,23 +46,23 @@
 
         </div>
 
-        <ul class="home-social">
-            <li>
-                <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i><span>Facebook</span></a>
-            </li>
-            <li>
-                <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i><span>Twiiter</span></a>
-            </li>
-            <li>
-                <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>
-            </li>
-            <li>
-                <a href="#0"><i class="fa fa-behance" aria-hidden="true"></i><span>Behance</span></a>
-            </li>
-            <li>
-                <a href="#0"><i class="fa fa-dribbble" aria-hidden="true"></i><span>Dribbble</span></a>
-            </li>
-        </ul>
+{#        <ul class="home-social">#}
+{#            <li>#}
+{#                <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i><span>Facebook</span></a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i><span>Twiiter</span></a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="#0"><i class="fa fa-behance" aria-hidden="true"></i><span>Behance</span></a>#}
+{#            </li>#}
+{#            <li>#}
+{#                <a href="#0"><i class="fa fa-dribbble" aria-hidden="true"></i><span>Dribbble</span></a>#}
+{#            </li>#}
+{#        </ul>#}
 
     </section>
 {% endblock %}

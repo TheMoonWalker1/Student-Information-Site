@@ -90,7 +90,7 @@ body {
  * ## links
  * ------------------------------------------------------------------- */
 a {
-    color: #0087cc;
+    color: inherit;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
@@ -1667,8 +1667,15 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 .header-menu-toggle:hover, .header-menu-toggle:focus {
     color: #FFFFFF;
 }
-
-.header-menu-text {
+.header-menu{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -70px;
+    width: 70px;
+    padding-left: 12px;
+}
+.header-menu-text{
     display: block;
     position: absolute;
     top: 0;
@@ -2381,6 +2388,7 @@ html.no-csstransitions .home-content__main {
  * ------------------------------------------------------------------- */
 .services-list {
     margin-top: 6rem;
+    text-decoration: none;
 }
 
 .services-list .service-item {
@@ -3547,7 +3555,7 @@ html.no-csstransitions .home-content__main {
  *
  * ------------------------------------------------------------------- */
 footer {
-    padding: 9rem 0 6rem;
+    padding: 2rem 0 2rem;
     font-family: "montserrat-light", sans-serif;
     font-size: 15px;
     line-height: 2;
@@ -3572,7 +3580,7 @@ footer a:hover, footer a:focus, footer a:active {
 }
 
 footer .row {
-    max-width: 980px;
+    /*max-width: 980px;*/
 }
 
 
@@ -3591,17 +3599,32 @@ footer .row {
     padding-left: 40px;
 }
 
-.footer-logo {
+.footer-gin-logo {
     display: block;
-    margin: -.6rem 0 3.6rem 0;
+    /*margin: -.6rem 0 3.6rem 0;*/
     padding: 0;
     outline: 0;
     border: none;
-    width: 85px;
-    height: 28px;
+    width: auto;
+    height: 170px;
     background: url("../images/logo-footer.png") no-repeat center;
-    background-size: 85px 28px;
-    font: 0/0 a;
+    background-size: 170px auto;
+    text-shadow: none;
+    color: transparent;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.footer-unox-logo{
+    display: block;
+    /*margin: -.6rem 0 3.6rem 0;*/
+    padding: 0;
+    outline: 0;
+    border: none;
+    width: auto;
+    height: 170px;
+    background: url("../images/unox_logo.png") no-repeat center;
+    background-size: 170px auto;
     text-shadow: none;
     color: transparent;
     -webkit-transition: all 0.3s ease-in-out;
@@ -3681,7 +3704,7 @@ footer .row {
  * ## footer bottom
  * --------------------------------------------------------------- */
 .footer-bottom {
-    margin-top: 5.4rem;
+    /*margin-top: 5.4rem;*/
     text-align: center;
     font-size: 14px;
 }
@@ -3772,7 +3795,10 @@ footer .row {
     .footer-main .right {
         padding-left: 10px;
     }
-    .footer-logo {
+    .footer-gin-logo {
+        margin: -.6rem auto 3.6rem;
+    }
+    .footer-unox-logo {
         margin: -.6rem auto 3.6rem;
     }
     .footer-bottom {
