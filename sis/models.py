@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-
 # Create your models here.
 class Class(models.Model):
     name = models.CharField(max_length=300, blank=False)
