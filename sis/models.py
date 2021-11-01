@@ -1,6 +1,8 @@
 from django.db import models
 import uuid
 from django.contrib.auth import get_user_model
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 
 # Create your models here.
@@ -38,3 +40,19 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Profile(models.Model):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+    user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
+    gender = models.CharField(max_length=1, blank=False, choices=GENDER_CHOICES)
+    fathers_name = models.CharField(max_length=50, blank=False)
+    mothers_name = models.CharField(max_length=50, blank=False)
+    guardian_name = models.CharField(max_length=50, blank=False)
+    dob = models.DateField(name="Date Of Birth")
+    phone = PhoneNumberField(blank=False)
+    mobile = PhoneNumberField(blank=True)
+    address = models.CharField(max_length=300, blank=False)
