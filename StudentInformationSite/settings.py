@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'crispy_forms',
     'django_filters',
+    'phonenumber_field',
     'sis',
     'users',
 
