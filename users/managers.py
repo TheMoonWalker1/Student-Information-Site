@@ -1,4 +1,5 @@
 from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -15,6 +16,9 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('The Email must be set'))
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
+        if extra_fields.get('is_staff') is True:
+            user.groups.add(Group.objects.get(name='staff'))
+        print("tomato man is heere")
         user.set_password(password)
         user.save()
         return user
