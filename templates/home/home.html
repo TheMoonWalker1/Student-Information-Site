@@ -11,19 +11,19 @@
     {% if not user.is_authenticated %}
         <li><a class=""  href="{% url 'login' %}" title="login">Login</a></li>
     {% else %}
-        <li class="current"><a class="smoothscroll"  href="{% url 'home' %}" title="home">Home</a></li>
+        <li class="current"><a class=""  href="{% url 'home' %}" title="home">Home</a></li>
         {% if not user.is_staff %}
-            <li class=""><a class="smoothscroll"  href="#Grades" title="grades">Grades</a></li>
-            <li class=""><a class="smoothscroll"  href="#Classes" title="classes">Classes</a></li>
-            <li class=""><a class="smoothscroll"  href="#Report" title="reports">Report Card</a></li>
-            <li class=""><a class="smoothscroll"  href="#Info" title="info">Student Info</a></li>
+            <li class=""><a class=""  href="#Grades" title="grades">Grades</a></li>
+            <li class=""><a class=""  href="#Classes" title="classes">Classes</a></li>
+            <li class=""><a class=""  href="#Report" title="reports">Report Card</a></li>
+            <li class=""><a class=""  href="#Info" title="info">Student Info</a></li>
         {% elif user.is_staff and not user.is_superuser %}
-            <li class=""><a class="smoothscroll"  href="#ManageClasses" title="manage_classes">Manage Classes</a></li>
-            <li class=""><a class="smoothscroll"  href="#GradeBook" title="gradebook">Grade Book</a></li>
+            <li class=""><a class=""  href="#ManageClasses" title="manage_classes">Manage Classes</a></li>
+            <li class=""><a class=""  href="#GradeBook" title="gradebook">Grade Book</a></li>
         {% else %}
             <li><a class=""  href="{% url 'api-root' %}" title="api">API</a></li>
-            <li class=""><a class="smoothscroll"  href="#ManageSchools" title="manage_schools">Manage Schools</a></li>
-            <li class=""><a class="smoothscroll"  href="#ManageUsers" title="manage_users">Manage Users</a></li>
+            <li class=""><a class=""  href="{% url 'manage_schools' %}" title="manage_schools">Manage Schools</a></li>
+            <li class=""><a class=""  href="#ManageUsers" title="manage_users">Manage Users</a></li>
         {% endif %}
 
         <hr style="background-color: seashell; border: none; height: 2px;">
@@ -132,7 +132,7 @@
                             </p>
                         </div>
                     </a></div>
-                    <div class="col-block service-item" data-aos="fade-up"><a href="#ManageSchools">
+                    <div class="col-block service-item" data-aos="fade-up"><a href="{% url 'manage_schools' %}">
                         <div class="service-icon">
                             <i class="fas fa-school"></i>
                         </div>

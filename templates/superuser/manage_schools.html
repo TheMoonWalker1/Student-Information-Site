@@ -1,0 +1,56 @@
+{% extends "home/base2.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+<script src="https://kit.fontawesome.com/41130295ba.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block navlist %}
+    {% if not user.is_authenticated %}
+        <li><a class=""  href="{% url 'login' %}" title="login">Login</a></li>
+    {% else %}
+        <li class="current"><a class=""  href="{% url 'home' %}" title="home">Home</a></li>
+        <li><a class=""  href="{% url 'api-root' %}" title="api">API</a></li>
+        <li class=""><a class=""  href="{% url 'manage_schools' %}" title="manage_schools">Manage Schools</a></li>
+        <li class=""><a class=""  href="#ManageUsers" title="manage_users">Manage Users</a></li>
+        <hr style="background-color: seashell; border: none; height: 2px;">
+        <li><a class=""  href="{% url 'logout' %}" title="logout">Logout</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if user.is_superuser %}
+    <section  id='services' class="s-services">
+        <div class="row section-header has-bottom-sep" data-aos="fade-up">
+            <div class="col-full">
+                <h1 class="display-1 display-1--dark" style="color: #39b54a">Manage Schools</h1>
+                <h3 class="subhead subhead--dark">Add School</h3>
+            </div>
+        </div> <!-- end section-header -->
+        <div class="row about-desc" data-aos="fade-up">
+            <div class="col-full" style="text-align: left">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if success %}
+                    <h6 style="color: green;">Successfully added the school to the database! <br>
+                        School staff will be able to join by registering using the following school code:<br></h6><h6>{{ uuid }}</h6>
+                    {% elif failure %}
+                    <h6 style="color: red;">Invalid school name, please try again. If this error occurs and this school is not already made, contact management. </h6>
+                    {% endif %}
+                    {% if form %}
+                    <label class="label-text" for="id_name">School Name:</label>
+                    <div class="form-field">
+                        <input class="full-width" type="text" name="name" maxlength="300" required="" id="id_name" placeholder="Ex: Thomas Jefferson High School For Science and Techonology">
+                    </div>
+                    <div class="form-field">
+                        <button class="full-width btn--primary">Submit</button>
+                    </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </section>
+{% endif %}
+{% endblock %}

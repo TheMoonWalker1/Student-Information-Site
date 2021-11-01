@@ -1,11 +1,35 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from rest_framework import viewsets
 from api import permissions
 from .serializers import *
+from .forms import *
 
 
-# Create your views here.
+# Template Views
+def manageSchoolsView(request):
+    data = {
+        'success': False,
+        'failure': False,
+    }
+    if request.method == "POST":
+        form = AddSchoolForm(request.POST)
+        if form.is_valid():
+            school = form.save()
+            data['success'] = True
+            data['uuid'] = school.id
+        else:
+            data['form'] = AddSchoolForm()
+            data['failure'] = True
+    elif request.user.is_authenticated and request.user.is_superuser:
+        data['form'] = AddSchoolForm()
+    else:
+        raise Http404("You are not a valid User")
+    return render(request, 'superuser/manage_schools.html', data)
+
+
+# Serializer Views
 class SchoolViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
