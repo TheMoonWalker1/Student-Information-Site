@@ -46,7 +46,9 @@
 {#                    <li><a class="smoothscroll"  href="#works" title="works">Works</a></li>#}
 {#                    <li><a class="smoothscroll"  href="#clients" title="clients">Clients</a></li>#}
 {#                    <li><a class="smoothscroll"  href="#contact" title="contact">Contact</a></li>#}
-                    <hr>
+
+
+                    <hr style="background-color: seashell; border: none; height: 2px;">
                     {% if not user.is_authenticated %}
                     <li><a class=""  href="{% url 'login' %}" title="login">Login</a></li>
                     {% else %}

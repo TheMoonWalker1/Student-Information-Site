@@ -40,25 +40,11 @@
                 <h3>Navigation</h3>
 
                 <ul class="header-nav__list">
-                    <li class="current"><a class="smoothscroll"  href="{% url 'home' %}" title="home">Home</a></li>
-                    <li class="current"><a class="smoothscroll"  href="#Grades" title="home">Grades</a></li>
-                    <li class="current"><a class="smoothscroll"  href="#Classes" title="home">Classes</a></li>
-                    <li class="current"><a class="smoothscroll"  href="#Report" title="home">Report Card</a></li>
-                    <li class="current"><a class="smoothscroll"  href="#Info" title="home">Student Info</a></li>
-{#                    <li><a class="smoothscroll"  href="#about" title="about">About</a></li>#}
-{#                    <li><a class="smoothscroll"  href="#services" title="services">Services</a></li>#}
-{#                    <li><a class="smoothscroll"  href="#works" title="works">Works</a></li>#}
-{#                    <li><a class="smoothscroll"  href="#clients" title="clients">Clients</a></li>#}
-{#                    <li><a class="smoothscroll"  href="#contact" title="contact">Contact</a></li>#}
-                    <hr>
-                    {% if not user.is_authenticated %}
-                    <li><a class=""  href="{% url 'login' %}" title="login">Login</a></li>
-                    {% else %}
-                    <li><a class=""  href="{% url 'logout' %}" title="logout">Logout</a></li>
-                    {% endif %}
+                    {% block navlist %}
+                    {% endblock %}
                 </ul>
 
-                <p>Perspiciatis hic praesentium nesciunt. Et neque a dolorum <a href='#0'>voluptatem</a> porro iusto sequi veritatis libero enim. Iusto id suscipit veritatis neque reprehenderit.</p>
+{#                <p>Perspiciatis hic praesentium nesciunt. Et neque a dolorum <a href='#0'>voluptatem</a> porro iusto sequi veritatis libero enim. Iusto id suscipit veritatis neque reprehenderit.</p>#}
 
             </div>
 

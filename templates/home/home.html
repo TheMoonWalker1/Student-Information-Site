@@ -7,6 +7,30 @@
 <script src="https://kit.fontawesome.com/41130295ba.js" crossorigin="anonymous"></script>
 {% endblock %}
 
+{% block navlist %}
+    {% if not user.is_authenticated %}
+        <li><a class=""  href="{% url 'login' %}" title="login">Login</a></li>
+    {% else %}
+        <li class="current"><a class="smoothscroll"  href="{% url 'home' %}" title="home">Home</a></li>
+        {% if not user.is_staff %}
+            <li class=""><a class="smoothscroll"  href="#Grades" title="grades">Grades</a></li>
+            <li class=""><a class="smoothscroll"  href="#Classes" title="classes">Classes</a></li>
+            <li class=""><a class="smoothscroll"  href="#Report" title="reports">Report Card</a></li>
+            <li class=""><a class="smoothscroll"  href="#Info" title="info">Student Info</a></li>
+        {% elif user.is_staff and not user.is_superuser %}
+            <li class=""><a class="smoothscroll"  href="#ManageClasses" title="manage_classes">Manage Classes</a></li>
+            <li class=""><a class="smoothscroll"  href="#GradeBook" title="gradebook">Grade Book</a></li>
+        {% else %}
+            <li><a class=""  href="{% url 'api-root' %}" title="api">API</a></li>
+            <li class=""><a class="smoothscroll"  href="#ManageSchools" title="manage_schools">Manage Schools</a></li>
+            <li class=""><a class="smoothscroll"  href="#ManageUsers" title="manage_users">Manage Users</a></li>
+        {% endif %}
+
+        <hr style="background-color: seashell; border: none; height: 2px;">
+        <li><a class=""  href="{% url 'logout' %}" title="logout">Logout</a></li>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 
     <section id='services' class="s-services">
@@ -16,58 +40,123 @@
                 <h1 class="display-2">Quick Links</h1>
             </div>
                 <br><br><br>
+
             <div class="row services-list block-1-2 block-tab-full">
-                <div class="col-block service-item" data-aos="fade-up"><a href="#Grades">
-                    <div class="service-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="service-text">
-                        <h3 class="h2">Grade Book</h3>
-                        <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
-                        Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
-                        Sunt suscipit voluptas ipsa in tempora esse soluta sint.
-                        </p>
-                    </div>
-                </a></div>
+                {% if not user.is_staff %}
+                    <div class="col-block service-item" data-aos="fade-up"><a href="#Grades">
+                        <div class="service-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">Grade Book</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
 
-                <div class="col-block service-item" data-aos="fade-up"><a href="#Classes">
-                    <div class="service-icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
-                    <div class="service-text">
-                        <h3 class="h2">Classes</h3>
-                        <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
-                        Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
-                        Sunt suscipit voluptas ipsa in tempora esse soluta sint.
-                        </p>
-                    </div>
-                </a></div>
+                    <div class="col-block service-item" data-aos="fade-up"><a href="#Classes">
+                        <div class="service-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">Classes</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
 
-                <div class="col-block service-item" data-aos="fade-up"><a href="#Report">
-                    <div class="service-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <div class="service-text">
-                        <h3 class="h2">Report Card</h3>
-                        <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
-                        Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
-                        Sunt suscipit voluptas ipsa in tempora esse soluta sint.
-                        </p>
-                    </div>
-                </a></div>
+                    <div class="col-block service-item" data-aos="fade-up"><a href="#Report">
+                        <div class="service-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">Report Card</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
 
-                <div class="col-block service-item" data-aos="fade-up"><a href="#Info">
-                    <div class="service-icon">
-                        <i class="fas fa-address-card"></i>
-                    </div>
-                    <div class="service-text">
-                        <h3 class="h2">Student Info</h3>
-                        <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
-                        Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
-                        Sunt suscipit voluptas ipsa in tempora esse soluta sint.
-                        </p>
-                    </div>
-                </a></div>
+                    <div class="col-block service-item" data-aos="fade-up"><a href="#Info">
+                        <div class="service-icon">
+                            <i class="fas fa-address-card"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">Student Info</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
+                {% elif user.is_staff and not user.is_superuser %}
+                    <div class="col-block service-item" data-aos="fade-up"><a href="#ManageClasses">
+                        <div class="service-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">Manage Classes</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
+                    <div class="col-block service-item" data-aos="fade-up"><a href="#GradeBook">
+                        <div class="service-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">Grade Book</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
+                {% else %}
+                    <div class="col-block service-item" data-aos="fade-up"><a href="{% url 'api-root' %}">
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">API</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
+                    <div class="col-block service-item" data-aos="fade-up"><a href="#ManageSchools">
+                        <div class="service-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">Manage Schools</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
+                    <div class="col-block service-item" data-aos="fade-up"><a href="#ManageUsers">
+                        <div class="service-icon">
+                            <i class="fas fa-address-card"></i>
+                        </div>
+                        <div class="service-text">
+                            <h3 class="h2">Manage Users</h3>
+                            <p>Nemo cupiditate ab quibusdam quaerat impedit magni. Earum suscipit ipsum laudantium.
+                            Quo delectus est. Maiores voluptas ab sit natus veritatis ut. Debitis nulla cumque veritatis.
+                            Sunt suscipit voluptas ipsa in tempora esse soluta sint.
+                            </p>
+                        </div>
+                    </a></div>
+                {% endif %}
             </div> <!-- end services-list -->
         </div>
     </section>
