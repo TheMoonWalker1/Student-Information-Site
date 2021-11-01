@@ -29,6 +29,8 @@ class Class(models.Model):
         if 60 > score:
             return "F"
 
+def create_student_code():
+    return uuid.uuid4().hex[:8].upper()
 
 class School(models.Model):
     name = models.CharField(max_length=300, blank=False, null=False, unique=True)
@@ -36,6 +38,8 @@ class School(models.Model):
     students = models.ManyToManyField(get_user_model(), related_name="students", blank=False)
     classes = models.ManyToManyField(Class, blank=False)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    staff_code = models.UUIDField(default=uuid.uuid4, editable=False)
+    student_code = models.CharField(max_length=5, default=create_student_code(), unique=True)
 
     def __str__(self):
         return self.name
