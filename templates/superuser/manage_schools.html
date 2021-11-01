@@ -35,7 +35,7 @@
                     {% csrf_token %}
                     {% if success %}
                     <h6 style="color: green;">Successfully added the school to the database! <br>
-                        School staff will be able to join by registering using the following school code:<br></h6><h6>{{ uuid }}</h6>
+                       Users will be able to join by registering using the following school codes:<br></h6><h6>Staff: {{ school.staff_code }}<br>Students: {{ school.student_code }}</h6>
                     {% elif failure %}
                     <h6 style="color: red;">Invalid school name, please try again. If this error occurs and this school is not already made, contact management. </h6>
                     {% endif %}

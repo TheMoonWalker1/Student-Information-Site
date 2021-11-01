@@ -18,7 +18,7 @@ def manageSchoolsView(request):
         if form.is_valid():
             school = form.save()
             data['success'] = True
-            data['uuid'] = school.id
+            data['school'] = school
         else:
             data['form'] = AddSchoolForm()
             data['failure'] = True
