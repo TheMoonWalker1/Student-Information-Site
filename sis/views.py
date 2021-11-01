@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
-from rest_framework import permissions
+from api import permissions
 from .serializers import *
 
 
@@ -12,7 +12,7 @@ class SchoolViewSet(viewsets.ModelViewSet):
     """
     queryset = School.objects.all()
     serializer_class = SchoolSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AdminAuthenticationPermission]
 
 
 class ClassViewSet(viewsets.ModelViewSet):
@@ -21,7 +21,7 @@ class ClassViewSet(viewsets.ModelViewSet):
     """
     queryset = Class.objects.all()
     serializer_class = ClassSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AdminAuthenticationPermission]
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
@@ -30,5 +30,5 @@ class ProfileViewSet(viewsets.ModelViewSet):
     """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AdminAuthenticationPermission]
 
