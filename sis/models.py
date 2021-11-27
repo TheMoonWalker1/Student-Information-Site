@@ -1,10 +1,44 @@
 from django.db import models
+from django.db.models import CheckConstraint, Q
 import uuid
 from django.contrib.auth import get_user_model
+from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
+class Entry(models.Model):
+    name = models.CharField(max_length=150, blank=False)
+    date = models.DateTimeField(default=timezone.now)
+    grade = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
+
+    class Meta:
+        constraints = (
+            # for checking in the DB
+            CheckConstraint(
+                check=Q(grade__gte=0.0) & Q(grade__lte=100.0),
+                name='grade_range'),
+        )
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=150, blank=False)
+    weight = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
+    value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
+
+    class Meta:
+        constraints = (
+            # for checking in the DB
+            CheckConstraint(
+                check=Q(weight__gte=0.0) & Q(weight__lte=100.0),
+                name='weight_range'),
+            CheckConstraint(
+                check=Q(value__gte=0.0) & Q(value__lte=100.0),
+                name='value_range'),
+        )
+
+
 class Class(models.Model):
     name = models.CharField(max_length=300, blank=False)
     teacher = models.ForeignKey(get_user_model(), blank=False, null=True, related_name="teacher", on_delete=models.SET_NULL)
@@ -12,6 +46,7 @@ class Class(models.Model):
     period = models.IntegerField(blank=False)
     room = models.CharField(max_length=10, blank=False)
     grade = models.FloatField(blank=False)
+    categories = models.ManyToManyField(Category, related_name="categories", blank=False)
 
     def __str__(self):
         return self.name + f' - Period: {self.period}'
@@ -29,8 +64,10 @@ class Class(models.Model):
         if 60 > score:
             return "F"
 
+
 def create_student_code():
     return uuid.uuid4().hex[:8].upper()
+
 
 class School(models.Model):
     name = models.CharField(max_length=300, blank=False, null=False, unique=True)
@@ -39,7 +76,7 @@ class School(models.Model):
     classes = models.ManyToManyField(Class, blank=False)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     staff_code = models.UUIDField(default=uuid.uuid4, editable=False)
-    student_code = models.CharField(max_length=5, default=create_student_code(), unique=True)
+    student_code = models.CharField(max_length=5, default=create_student_code(), unique=True, editable=False)
 
     def __str__(self):
         return self.name

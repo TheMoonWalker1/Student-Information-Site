@@ -3203,6 +3203,7 @@ html.no-csstransitions .home-content__main {
 
 .s-login .form-field {
     position: relative;
+    color: #FFFFFF;
 }
 
 .s-login .form-field:after {
@@ -3843,3 +3844,7 @@ footer .row {
 
 
 /*# sourceMappingURL=main.css.map */
+::placeholder {
+    color: seashell !important;
+    opacity: .6;
+}

@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from rest_framework import viewsets
 from api import permissions
@@ -9,9 +8,12 @@ from .forms import *
 
 # Template Views
 def manageSchoolsView(request):
+    if request.user.is_superuser is False:
+        return Http404("You are not a valid User")
     data = {
         'success': False,
         'failure': False,
+        'schools': School.objects.all()
     }
     if request.method == "POST":
         form = AddSchoolForm(request.POST)
@@ -22,7 +24,7 @@ def manageSchoolsView(request):
         else:
             data['form'] = AddSchoolForm()
             data['failure'] = True
-    elif request.user.is_authenticated and request.user.is_superuser:
+    elif request.user.is_authenticated:
         data['form'] = AddSchoolForm()
     else:
         raise Http404("You are not a valid User")
@@ -30,7 +32,25 @@ def manageSchoolsView(request):
 
 
 # Serializer Views
-class SchoolViewSet(viewsets.ModelViewSet):
+class EntryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Entry.objects.all()
+    serializer_class = EntrySerializer
+    permission_classes = [permissions.AdminAuthenticationPermission]
+
+
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.AdminAuthenticationPermission]
+
+
+class SchoolViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
@@ -39,7 +59,7 @@ class SchoolViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AdminAuthenticationPermission]
 
 
-class ClassViewSet(viewsets.ModelViewSet):
+class ClassViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
@@ -48,7 +68,7 @@ class ClassViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AdminAuthenticationPermission]
 
 
-class ProfileViewSet(viewsets.ModelViewSet):
+class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """

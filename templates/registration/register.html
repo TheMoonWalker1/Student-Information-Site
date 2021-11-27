@@ -1,7 +1,7 @@
 {% extends 'start/base1.html' %}
 {% load static %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
     <section id="login" class="s-login">
@@ -11,7 +11,7 @@
 
         <div class="row section-header" data-aos="fade-up">
             <div class="col-full">
-                <h3 class="subhead">login</h3>
+                <h3 class="subhead">Register</h3>
             </div>
         </div>
 
@@ -19,10 +19,10 @@
 
             <div class="contact-primary">
 
-                <br><br><br><br>
+                <br>
 
-                <h3 class="h6">Login to Access Gen.</h3>
-
+                <h3 class="h6">Register to Access Gen.</h3>
+                {% if exception %}<h6 style="color: red">{{ exception }}</h6>{% endif %}
                 <form method="post" novalidate="novalidate">
                     <fieldset>
                     {% csrf_token %}
@@ -31,10 +31,19 @@
                         <input name="username" type="text" autofocus autocapitalize="none" autocomplete="username" maxlength="254" id="id_username" placeholder="Email" required="" aria-required="true" class="full-width">
                     </div>
                     <div class="form-field">
+                        <input name="first_name" type="text" autofocus autocapitalize="none" autocomplete="first_name" maxlength="254" id="id_first_name" placeholder="First Name" required="" aria-required="true" class="full-width">
+                    </div>
+                    <div class="form-field">
+                        <input name="last_name" type="text" autofocus autocapitalize="none" autocomplete="last_name" maxlength="254" id="id_last_name" placeholder="Last Name" required="" aria-required="true" class="full-width">
+                    </div>
+                    <div class="form-field">
                         <input name="password" type="password" autocomplete="current-password" id="id_password" placeholder="Password" minlength="2" required="" aria-required="true" class="full-width">
                     </div>
                     <div class="form-field">
-                        <button class="full-width btn--primary">Login</button>
+                        <input name="code" type="text" autocapitalize="characters" maxlength="36" minlength="8" required aria-required="true" class="full-width" placeholder="School Code">
+                    </div>
+                    <div class="form-field">
+                        <button class="full-width btn--primary">Register</button>
                     </div>
                     </fieldset>
                 </form>
@@ -44,19 +53,19 @@
             <div class="contact-secondary">
                 <div class="contact-info">
 
-                    <h3 class="h6 hide-on-fullwidth">Don't Have an Account?</h3>
+                    <h3 class="h6 hide-on-fullwidth">Need Help?</h3>
 
                     <div class="cinfo">
-                        <h5>Students and Staff</h5>
+                        <h5>Don't know your code?</h5>
                         <p>
-                            <a href="{% url 'register' %}" style="color: #FFFFFF">Register</a> using your school code, so you can access your classes and grades!
+                            Obtain a unique school code by asking your school or teacher if you do not know it.
                         </p>
                     </div>
 
                     <div class="cinfo">
-                        <h5>Schools</h5>
+                        <h5>Have an Account?</h5>
                         <p>
-                            To create a school and obtain a code, contact us at <a href="mailto:contact@gen.com">contact@gen.com</a>!
+                            <a href="{% url 'login' %}" style="color: #FFFFFF">Login</a> to access Gen.!
                         </p>
                     </div>
 

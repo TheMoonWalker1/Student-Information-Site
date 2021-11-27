@@ -17,12 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
 from django.contrib.auth import views
+from users.views import registerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', TemplateView.as_view(template_name='start/start.html'), name='start'),
+
     path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
-    path('', TemplateView.as_view(template_name='start/start.html'), name='start'),
+    path('register/', registerView, name='register'),
+
     path('home/', include('sis.urls')),
     path('api/', include('api.urls')),
 ]
