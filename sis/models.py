@@ -45,14 +45,12 @@ class Class(models.Model):
     student = models.ForeignKey(get_user_model(), blank=False, null=True, related_name="student", on_delete=models.SET_NULL)
     period = models.IntegerField(blank=False)
     room = models.CharField(max_length=10, blank=False)
-    grade = models.FloatField(blank=False)
     categories = models.ManyToManyField(Category, related_name="categories", blank=False)
 
     def __str__(self):
         return self.name + f' - Period: {self.period}'
 
-    def letter_grade(self):
-        score = round(self.grade)
+    def letter_grade(self, score):
         if score >= 90:
             return "A"
         if 90 > score >= 80:

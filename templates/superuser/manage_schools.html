@@ -49,6 +49,16 @@
                     </div>
                     {% endif %}
                 </form>
+            <br><br>
+            <h6>Registered Schools</h6>
+            <hr>
+            {% for school in schools %}
+                <b>{{ school.name }}</b><br>
+                Staff Code: {{ school.staff_code }}<br>
+                Student Code: {{ school.student_code }}
+                <br>
+                <hr>
+            {% endfor %}
             </div>
         </div>
     </section>
