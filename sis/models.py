@@ -7,6 +7,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 
 
+
+def create_student_code():
+    return uuid.uuid4().hex[:8].upper()
+
 # Create your models here.
 class Entry(models.Model):
     name = models.CharField(max_length=150, blank=False)
@@ -26,6 +30,7 @@ class Category(models.Model):
     name = models.CharField(max_length=150, blank=False)
     weight = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
     value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
+    assignments = models.ManyToManyField(Entry, related_name="assignments", blank=True)
 
     class Meta:
         constraints = (
@@ -41,11 +46,12 @@ class Category(models.Model):
 
 class Class(models.Model):
     name = models.CharField(max_length=300, blank=False)
-    teacher = models.ForeignKey(get_user_model(), blank=False, null=True, related_name="teacher", on_delete=models.SET_NULL)
-    student = models.ForeignKey(get_user_model(), blank=False, null=True, related_name="student", on_delete=models.SET_NULL)
+    teacher = models.ForeignKey(get_user_model(), blank=True, null=True, related_name="teacher", on_delete=models.SET_NULL)
+    student = models.ManyToManyField(get_user_model(), blank=True, null=True, related_name="student")
     period = models.IntegerField(blank=False)
     room = models.CharField(max_length=10, blank=False)
-    categories = models.ManyToManyField(Category, related_name="categories", blank=False)
+    categories = models.ManyToManyField(Category, related_name="categories", blank=True)
+    code = models.CharField(max_length=5, default=create_student_code(), unique=True, editable=False)
 
     def __str__(self):
         return self.name + f' - Period: {self.period}'
@@ -61,10 +67,6 @@ class Class(models.Model):
             return "D"
         if 60 > score:
             return "F"
-
-
-def create_student_code():
-    return uuid.uuid4().hex[:8].upper()
 
 
 class School(models.Model):

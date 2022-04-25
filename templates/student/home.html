@@ -1,4 +1,4 @@
-{% extends "home/base2.html" %}
+{% extends "student/base2.html" %}
 {% load static %}
 
 {% block title %}Home{% endblock %}
@@ -14,7 +14,7 @@
         <li class="current"><a class=""  href="{% url 'home' %}" title="home">Home</a></li>
         {% if not user.is_staff %}
             <li class=""><a class=""  href="#Grades" title="grades">Grades</a></li>
-            <li class=""><a class=""  href="#Classes" title="classes">Classes</a></li>
+            <li class=""><a class=""  href="{% url 'classes' %}" title="classes">Classes</a></li>
             <li class=""><a class=""  href="#Report" title="reports">Report Card</a></li>
             <li class=""><a class=""  href="#Info" title="info">Student Info</a></li>
         {% elif user.is_staff and not user.is_superuser %}
@@ -95,7 +95,7 @@
                         </div>
                     </a></div>
                 {% elif user.is_staff and not user.is_superuser %}
-                    <div class="col-block service-item" data-aos="fade-up"><a href="#ManageClasses">
+                    <div class="col-block service-item" data-aos="fade-up"><a href="{% url 'manage_classes' %}">
                         <div class="service-icon">
                             <i class="fas fa-school"></i>
                         </div>

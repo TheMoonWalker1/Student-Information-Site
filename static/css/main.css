@@ -31,10 +31,10 @@
  *      ## header logo
  *      ## main navigation 
  *      ## mobile menu toggle 
- *  # home 
- *      ## home content
- *      ## home social 
- *      ## home animations
+ *  # student
+ *      ## student content
+ *      ## student social
+ *      ## student animations
  *  # about
  *      ## about stats
  *  # services
@@ -1744,7 +1744,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 
 /* ===================================================================
- * # home 
+ * # student
  *
  * ------------------------------------------------------------------- */
 .s-home {
@@ -1785,7 +1785,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 
 /* ------------------------------------------------------------------- 
- * ## home content
+ * ## student content
  * ------------------------------------------------------------------- */
 .home-content {
     display: table-cell;
@@ -1899,7 +1899,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 
 /* ------------------------------------------------------------------- 
- * ## home social 
+ * ## student social
  * ------------------------------------------------------------------- */
 .home-social {
     font-family: "montserrat-regular", sans-serif;
@@ -1973,7 +1973,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 
-/* animate .home-content__main
+/* animate .student-content__main
  * ------------------------------------------------------------------- */
 html.cl-preload .home-content__main {
     opacity: 0;
@@ -1991,7 +1991,7 @@ html.no-csstransitions .home-content__main {
 
 
 /* ------------------------------------------------------------------- 
- * ## home animations
+ * ## student animations
  * ------------------------------------------------------------------- */
 
 
@@ -2057,7 +2057,7 @@ html.no-csstransitions .home-content__main {
 
 /* ------------------------------------------------------------------- 
  * responsive:
- * home
+ * student
  * ------------------------------------------------------------------- */
 @media only screen and (max-width: 1500px) {
     .home-content h1 {

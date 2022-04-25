@@ -1,0 +1,114 @@
+{% extends "student/base2.html" %}
+{% load static %}
+
+{% block title %}Manage Classes{% endblock %}
+
+{% block head %}
+<script src="https://kit.fontawesome.com/41130295ba.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block navlist %}
+    {% if not user.is_authenticated %}
+        <li><a class=""  href="{% url 'login' %}" title="login">Login</a></li>
+    {% else %}
+        <li class="current"><a class=""  href="{% url 'home' %}" title="home">Home</a></li>
+            <li class=""><a class=""  href="#ManageClasses" title="manage_classes">Manage Classes</a></li>
+            <li class=""><a class=""  href="#GradeBook" title="gradebook">Grade Book</a></li>
+        <hr style="background-color: seashell; border: none; height: 2px;">
+        <li><a class=""  href="{% url 'logout' %}" title="logout">Logout</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if user.is_staff %}
+    <section  id='services' class="s-services">
+        <div class="row section-header has-bottom-sep" data-aos="fade-up">
+            <div class="col-full">
+                <h1 class="display-1 display-1--dark" style="color: #39b54a">Manage Classes</h1>
+                <h3 class="subhead subhead--dark">Add Class</h3>
+            </div>
+        </div> <!-- end section-header -->
+        <div class="row section-header has-bottom-sep" data-aos="fade-up" style="align-content: normal;">
+            To add a class, enter the class name and the grading categories below.
+                The category weight should be numbers from 0 to 100, and the sum of all
+                category weights should be equal to 100. Make sure to put as many
+                categories as needed before filling in the information.
+        </div>
+        <div class="row about-desc" data-aos="fade-up">
+            <div class="col-full" style="text-align: left">
+                <form method="POST" style="background-color: #FAFAFA !important; padding: 10px;">
+                    {% csrf_token %}
+                    <h3 style="color: #39b54a; margin-top: 2px;">Class Details:</h3>
+                    {% if success %}
+                    <h6 style="color: green;">Successfully added the Class to the database! <br>
+                       Students will be able to join by adding a class using the following code:<br></h6><h6>{{ code }} </h6>
+                    {% elif failure %}
+                    <h6 style="color: red;">Invalid<br>
+                    {{ message }}</h6>
+                    {% endif %}
+                    <label class="label-text" for="id_name">Class Name:</label>
+                    <div class="form-field">
+                        <input class="full-width" type="text" name="class_name" maxlength="300" required="" id="id_name" placeholder="Ex: Algebra II">
+                    </div>
+                    <label class="label-text" for="id_period">Class Period:</label>
+                    <div class="form-field">
+                        <input class="full-width" type="text" name="class_period" maxlength="300" required="" id="id_period" placeholder="Ex: Algebra II">
+                    </div>
+                    <label class="label-text" for="id_room">Class Room Number:</label>
+                    <div class="form-field">
+                        <input class="full-width" type="text" name="class_room_number" maxlength="300" required="" id="id_room" placeholder="Ex: Algebra II">
+                    </div>
+                    <hr>
+                    <h3 style="color: #39b54a">Grading Categories:</h3>
+{#                    <div style="padding: 25px 100px;">#}
+                    <div id="categories">
+{#                        <u><h6 style="margin-top: 4px;">Category 1</h6></u>#}
+{#                        <label class='label-text' for='id_category_name_1'>Category Name:</label>#}
+{#                        <div class='form-field'>#}
+{#                            <input class='full-width' type='text' name='category_name_1' maxlength='300' required='' id='id_category_name_1' placeholder='Ex: Assesments'>#}
+{#                        </div>#}
+{#                        <label class='label-text' for='id_category_weight_1'>Category Weight:</label>#}
+{#                        <div class='form-field'>#}
+{#                            <input class='full-width' type='text' name='category_weight_1' maxlength='300' required='' id='id_category_weight_1' placeholder='Percentage: 0%-100%'>#}
+{#                        </div>#}
+{#                        <hr>#}
+                    </div>
+                    <h6><a href="#add" onclick="addCategory()">add category</a></h6>
+{#                    </div>#}
+                    <div class="form-field" style="padding-top: 50px">
+                        <button class="full-width btn--primary">Submit</button>
+                    </div>
+                </form>
+            <br><br>
+            <h3 style="color: #39b54a" >Registered Classes</h3>
+            <hr>
+            {% for class in classes %}
+                <a href="#class" style="color: seagreen;"><b>{{ class.name }} - Period: {{ class.period }}</b><br></a>
+                Code: {{ class.code }}<br>
+                <br>
+                <hr>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        let cat_num = 1;
+        const add_html =
+            "<u><h6 style='margin-top: 4px;'>Category {}</h6></u>\n" +
+            "<label class='label-text' for='id_category_name_{}'>Category Name:</label>\n" +
+            "<div class='form-field'>\n" +
+            "<input class='full-width' type='text' name='category_name_{}' maxlength='300' required='' id='id_category_name_{}' placeholder='Ex: Assesments'>\n" +
+            "</div>\n" +
+            "\t<label class='label-text' for='id_category_weight_{}'>Category Weight:</label>\n" +
+            "<div class='form-field'>\n" +
+            "\t<input class='full-width' type='text' name='category_weight_{}' maxlength='300' required='' id='id_category_weight_{}' placeholder='Percentage: 0%-100%'>\n" +
+            "</div>\n" +
+            "<hr>"
+
+        function addCategory() {
+           document.getElementById("categories").innerHTML += add_html.replace(/{}/g, cat_num);
+           cat_num+=1;
+        }
+    </script>
+{% endif %}
+{% endblock %}
